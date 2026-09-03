@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WWWZ.UZ — Erkin va Bepul Subdomenlar Platformasi</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --bg-base: #0a0a0a;
+            --bg-surface: #121212;
+            --bg-surface-hover: #1c1c1c;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.16);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #52525b;
+            --accent: #ffffff;
+            --accent-error: #ef4444;
+            --accent-success: #22c55e;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+        }
+
+        body {
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background-color: var(--text-primary);
+            color: var(--bg-base);
+        }
+
+        /* Container helper */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.5rem;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.05em;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            background: var(--text-primary);
+            color: var(--bg-base);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            background-color: var(--text-primary);
+            color: var(--bg-base);
+            border: 1px solid var(--text-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+            box-shadow: none;
+        }
+
+        /* Hero Section (Asymmetric / Grid Based) */
+        .hero {
+            padding: 6rem 0 4rem 0;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: calc(100dvh - 4.5rem);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-badge {
+            align-self: flex-start;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-badge .live-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-success);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+        }
+
+        .hero-title span {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 52ch;
+            line-height: 1.5;
+        }
+
+        /* Interactive Subdomain Form Card */
+        .hero-interactive {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Grain overlay for depth */
+        .hero-interactive::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .search-container {
+            z-index: 2;
+        }
+
+        .search-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .domain-input-group {
+            display: flex;
+            align-items: stretch;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.25rem;
+            transition: var(--transition-smooth);
+        }
+
+        .domain-input-group:focus-within {
+            border-color: var(--text-primary);
+        }
+
+        .subdomain-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            font-family: var(--font-mono);
+            font-size: 1.05rem;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .subdomain-input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .domain-suffix {
+            display: flex;
+            align-items: center;
+            padding-right: 1.25rem;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        /* Search Feedbacks */
+        .feedback-box {
+            display: none;
+            animation: fadeIn 0.2s ease-out forwards;
+            font-size: 0.85rem;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid transparent;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-checking {
+            background-color: rgba(255, 255, 255, 0.02);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--text-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .feedback-available {
+            background-color: rgba(34, 197, 94, 0.04);
+            border-color: rgba(34, 197, 94, 0.2);
+            color: var(--accent-success);
+        }
+
+        .feedback-available .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(34, 197, 94, 0.1);
+        }
+
+        .feedback-unavailable {
+            background-color: rgba(239, 68, 68, 0.04);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: var(--accent-error);
+        }
+
+        /* Asymmetric Features & Layout Details */
+        .features-section {
+            padding: 8rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 6rem;
+        }
+
+        .features-left {
+            position: sticky;
+            top: 7rem;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .features-left h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .features-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 35ch;
+        }
+
+        .features-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-row {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 0.4fr 1.6fr;
+            gap: 2rem;
+            transition: var(--transition-smooth);
+        }
+
+        .feature-row:first-child {
+            padding-top: 0;
+        }
+
+        .feature-row:hover {
+            border-bottom-color: var(--text-primary);
+        }
+
+        .feature-num {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .feature-row:hover .feature-num {
+            color: var(--text-primary);
+        }
+
+        .feature-details h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .feature-details p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Live Activity Ticker */
+        .ticker-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .ticker-container {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: scroll-ticker 30s linear infinite;
+        }
+
+        .ticker-container:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 1rem)); }
+        }
+
+        .ticker-card {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            user-select: none;
+            transition: var(--transition-smooth);
+        }
+
+        .ticker-card:hover {
+            border-color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .ticker-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-success);
+            border-radius: 50%;
+        }
+
+        .ticker-domain {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .ticker-time {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* Beautiful Accordion FAQ */
+        .faq-section {
+            padding: 8rem 0;
+        }
+
+        .faq-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--bg-surface);
+            transition: var(--transition-smooth);
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-hover);
+        }
+
+        .faq-trigger {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-trigger svg {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            stroke: var(--text-secondary);
+        }
+
+        .faq-item.active {
+            border-color: var(--text-primary);
+        }
+
+        .faq-item.active .faq-trigger svg {
+            transform: rotate(45deg);
+            stroke: var(--text-primary);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .faq-content-inner {
+            padding: 0 2rem 1.5rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            line-height: 1.6;
+        }
+
+        /* Modal / Dialog Styling for registration claim */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 24px;
+            padding: 2.5rem;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .modal-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .modal-subtitle span {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-input:focus {
+            border-color: var(--text-primary);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .modal-btn-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn-row .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Success Step / Complete */
+        .success-step {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-success);
+        }
+
+        .success-step h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .success-step p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 35ch;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0;
+            background-color: var(--bg-base);
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                padding: 4rem 0;
+                text-align: left;
+            }
+
+            .hero-badge {
+                align-self: flex-start;
+            }
+
+            .hero-title {
+                font-size: 2.75rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .features-left {
+                position: relative;
+                top: 0;
+            }
+
+            .feature-row {
+                grid-template-columns: auto 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-wrapper {
+                height: 4rem;
+            }
+
+            nav {
+                display: none; /* Can add simplified or drawer menu later if requested */
+            }
+
+            .hero-title {
+                font-size: 2.25rem;
+            }
+
+            .hero-interactive {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+
+            .domain-input-group {
+                flex-direction: column;
+                background-color: transparent;
+                border: none;
+                gap: 0.75rem;
+                padding: 0;
+            }
+
+            .subdomain-input, .domain-suffix {
+                background-color: var(--bg-surface);
+                border: 1px solid var(--border-color);
+                border-radius: 10px;
+                padding: 0.8rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .subdomain-input:focus {
+                border-color: var(--text-primary);
+            }
+
+            .domain-suffix {
+                justify-content: flex-end;
+            }
+
+            .hero-interactive .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.8rem;
+            }
+
+            .footer-wrapper {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <span>W</span> wwwz.uz
+            </a>
+            <nav>
+                <a href="#features">Imkoniyatlar</a>
+                <a href="#faq">Ko'p so'raladigan savollar</a>
+            </nav>
+            <div>
+                <a href="#search-zone" class="btn">Subdomen claim qilish</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="container hero" id="search-zone">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="live-dot"></span> 24/7 Avtomatlashtirilgan Platforma
+                </div>
+                <h1 class="hero-title">
+                    O'z g'oyangizni<br>
+                    <span>dunyoga taqdim eting</span>
+                </h1>
+                <p class="hero-desc">
+                    wwwz.uz platformasi orqali mutlaqo bepul, xavfsiz va tezkor subdomenga ega bo'ling. Hech qanday murakkabliklarsiz, bir necha soniyada o'z loyihangizni internet tarmog'iga ulang.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <a href="#features" class="btn btn-secondary">Batafsil ma'lumot</a>
+                </div>
+            </div>
+
+            <!-- Interactive Domain Checker Card -->
+            <div class="hero-interactive">
+                <div class="search-container">
+                    <h3 class="search-title">Subdomenni band qilish</h3>
+                    <p class="search-desc">O'zingiz xohlagan nomni yozing va uning bo'sh yoki bandligini tekshiring.</p>
+                    
+                    <div class="domain-input-group">
+                        <input type="text" id="subdomain-search" class="subdomain-input" placeholder="masalan: portfoliom" autocomplete="off" spellcheck="false">
+                        <div class="domain-suffix">.wwwz.uz</div>
+                    </div>
+                    
+                    <button id="btn-check" class="btn" style="width: 100%; justify-content: center; margin-top: 1.25rem;">
+                        Tekshirish
+                    </button>
+                </div>
+
+                <!-- Feedback States -->
+                <div id="feedback-checking" class="feedback-box feedback-checking">
+                    <div class="spinner"></div>
+                    <span>Domen tekshirilmoqda, iltimos kuting...</span>
+                </div>
+
+                <div id="feedback-available" class="feedback-box feedback-available">
+                    <div style="font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                        Tabriklaymiz! Ushbu domen bo'sh.
+                    </div>
+                    <div style="margin-top: 0.25rem; font-size: 0.8rem; opacity: 0.9;">
+                        Siz ushbu domenni mutlaqo bepul o'zingizniki qilishingiz mumkin.
+                    </div>
+                    <div class="action-row">
+                        <span style="font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; color: var(--text-primary);" id="available-domain-name">portfolio.wwwz.uz</span>
+                        <button class="btn btn-secondary" id="btn-claim" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">O'rnatish</button>
+                    </div>
+                </div>
+
+                <div id="feedback-unavailable" class="feedback-box feedback-unavailable">
+                    <div style="font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        Afsuski, bu domen band!
+                    </div>
+                    <div style="margin-top: 0.25rem; font-size: 0.8rem; opacity: 0.9;">
+                        Iltimos, boshqa nom kiriting yoki tavsiya etilgan nomlardan birini tanlang.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Showcase Ticker -->
+        <section class="ticker-section">
+            <h4 class="ticker-title">Yaqinda faollashtirilgan subdomenlar</h4>
+            <div style="display: flex; overflow: hidden; width: 100%;">
+                <div class="ticker-container" id="ticker-root">
+                    <!-- Cards will be populated and duplicated for seamless infinite scroll in JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="container features-section" id="features">
+            <div class="features-grid">
+                <div class="features-left">
+                    <h2>Nega aynan wwwz.uz?</h2>
+                    <p>Biz dasturchilar va startapchilar uchun eng qulay va minimalistik infratuzilmani taklif etamiz.</p>
+                </div>
+                <div class="features-right">
+                    
+                    <div class="feature-row">
+                        <div class="feature-num">01</div>
+                        <div class="feature-details">
+                            <h3>Tezkor DNS yo'naltirish</h3>
+                            <p>Bizning ultra-zamonaviy DNS boshqaruv tizimimiz orqali subdomeningiz har qanday xalqaro platformalarga (Vercel, Cloudflare, Netlify, Github Pages yoki shaxsiy VPS) bir necha soniyada bog'lanadi.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-num">02</div>
+                        <div class="feature-details">
+                            <h3>Bepul va Umrbod</h3>
+                            <p>Hech qanday yashirin to'lovlar, kredit kartalar yoki kutilmagan reklamalar yo'q. Loyihangiz wwwz.uz bilan birga mutlaqo tekinga va doimiy ravishda ishlaydi.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-num">03</div>
+                        <div class="feature-details">
+                            <h3>Avtomatik SSL xavfsizligi</h3>
+                            <p>Siz yo'naltirgan har bir subdomen uchun avtomatik ravishda bepul HTTPS (SSL) sertifikati taqdim etiladi. Saytingiz doimo xavfsiz va Google talablariga mos bo'ladi.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-num">04</div>
+                        <div class="feature-details">
+                            <h3>Oddiy va Qulay API</h3>
+                            <p>Avtomatlashtirishni yoqtirasizmi? Kelajakda ishlab chiqiladigan sodda API orqali dasturiy ravishda subdomenlarni ro'yxatdan o'tkazish va boshqarish imkoniyatiga ega bo'lasiz.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container faq-section" id="faq">
+            <h2 class="faq-title">Tez-tez beriladigan savollar</h2>
+            
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Xizmat haqiqatdan ham bepulmi?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Ha, mutlaqo bepul. wwwz.uz O'zbekistondagi yosh dasturchilar va ijodkorlar o'z loyihalarini osonroq sinab ko'rishlari hamda internetga joylashtirishlari uchun yaratilgan mustaqil notijorat loyihadir.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Subdomenni qanday qilib o'zimning hosting/serverimga ulayman?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Ro'yxatdan o'tish paytida siz o'z hostingingiz IP-manzilini (A yozuvi uchun) yoki yo'naltiriladigan asosiy domenni (CNAME yozuvi uchun) ko'rsatasiz. Tizimimiz buni avtomatik ravishda global DNS serverlarimizga joylaydi.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Bitta odam nechta subdomen ro'yxatdan o'tkazishi mumkin?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Suiiste'mol qilishlarning oldini olish maqsadida bitta foydalanuvchi/email hisobiga dastlab maksimal 3 tagacha bepul subdomen beriladi. Agar loyihalaringiz soni va ko'lami ortsa, qo'shimcha so'rov yuborishingiz mumkin.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Taqiqlangan yoki noqonuniy loyihalarga ruxsat beriladimi?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Yo'q. Fishing, firibgarlik, spam, kattalar uchun mo'ljallangan kontentlar yoki har qanday noqonuniy loyihalar uchun ochilgan subdomenlar ogohlantirishsiz darhol bloklanadi va o'chiriladi.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-wrapper">
+            <div class="footer-left">
+                <a href="#" class="logo" style="margin-bottom: 0.5rem;">
+                    <span>W</span> wwwz.uz
+                </a>
+                <p class="footer-copy">© 2026 wwwz.uz. Barcha huquqlar himoyalangan.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#features">Imkoniyatlar</a>
+                <a href="#faq">FAQ</a>
+                <a href="mailto:info@wwwz.uz">Aloqa</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Claim Modal -->
+    <div class="modal-overlay" id="claim-modal">
+        <div class="modal">
+            <button class="close-modal" id="btn-close-modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            
+            <!-- Step 1: Form Fill -->
+            <div id="modal-step-form">
+                <h3 class="modal-title">Subdomenni sozlash</h3>
+                <p class="modal-subtitle">Siz tanlagan domen: <span id="target-domain-span">portfolio.wwwz.uz</span></p>
+                
+                <form id="claim-form">
+                    <div class="form-group">
+                        <label for="form-email">Email manzilingiz</label>
+                        <input type="email" id="form-email" class="form-input" placeholder="ism@gmail.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="form-record-type">Yozuv turi (DNS Record Type)</label>
+                        <select id="form-record-type" class="form-input" style="background-color: var(--bg-base); cursor: pointer;">
+                            <option value="A">A Record (IPv4 server manzili uchun)</option>
+                            <option value="CNAME">CNAME (Vercel, GitHub Pages yoki Netlify uchun)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="form-target" id="label-target">Server IP manzili (A Record)</label>
+                        <input type="text" id="form-target" class="form-input" placeholder="masalan: 185.196.212.52" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; text-transform: none; font-size: 0.85rem; cursor: pointer;">
+                            <input type="checkbox" required style="accent-color: var(--text-primary); width: 16px; height: 16px;">
+                            <span>Foydalanish shartlariga roziman</span>
+                        </label>
+                    </div>
+
+                    <div class="modal-btn-row">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-claim">Bekor qilish</button>
+                        <button type="submit" class="btn">Domen yaratish</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Success State -->
+            <div id="modal-step-success" class="success-step">
+                <div class="success-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h3>Domen muvaffaqiyatli sozlindi!</h3>
+                <p>Sizning <span id="final-domain-span" style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary);">portfolio.wwwz.uz</span> subdomeningiz muvaffaqiyatli ro'yxatdan o'tkazildi va ulanmoqda.</p>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: -0.5rem;">Global DNS yangilanishi uchun taxminan 5-15 daqiqa vaqt ketishi mumkin.</p>
+                <button class="btn" id="btn-success-done" style="width: 100%; justify-content: center; margin-top: 1rem;">Tushunarli</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Logic (Vanilla JS) -->
+    <script>
+        // DOM Elements
+        const subdomainSearch = document.getElementById('subdomain-search');
+        const btnCheck = document.getElementById('btn-check');
+        const feedbackChecking = document.getElementById('feedback-checking');
+        const feedbackAvailable = document.getElementById('feedback-available');
+        const feedbackUnavailable = document.getElementById('feedback-unavailable');
+        const availableDomainName = document.getElementById('available-domain-name');
+        
+        const btnClaim = document.getElementById('btn-claim');
+        const claimModal = document.getElementById('claim-modal');
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        const btnCancelClaim = document.getElementById('btn-cancel-claim');
+        const targetDomainSpan = document.getElementById('target-domain-span');
+        const finalDomainSpan = document.getElementById('final-domain-span');
+        const claimForm = document.getElementById('claim-form');
+        const formRecordType = document.getElementById('form-record-type');
+        const labelTarget = document.getElementById('label-target');
+        const formTarget = document.getElementById('form-target');
+        const modalStepForm = document.getElementById('modal-step-form');
+        const modalStepSuccess = document.getElementById('modal-step-success');
+        const btnSuccessDone = document.getElementById('btn-success-done');
+
+        // Reserved subdomains to mock unavailable names
+        const reservedNames = ['admin', 'www', 'api', 'blog', 'test', 'dev', 'mail', 'dns', 'suvan', 'ahost', 'root', 'main', 'index', 'secure', 'portal', 'cloud', 'app'];
+
+        // FAQ Interactive Logic
+        document.querySelectorAll('.faq-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const item = trigger.parentElement;
+                const content = item.querySelector('.faq-content');
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Search Input Filtering (alphanumeric & hyphens only)
+        subdomainSearch.addEventListener('input', (e) => {
+            let value = e.target.value.toLowerCase();
+            value = value.replace(/[^a-z0-9-]/g, '');
+            e.target.value = value;
+            
+            // Hide feedbacks when user typing again
+            feedbackChecking.style.display = 'none';
+            feedbackAvailable.style.display = 'none';
+            feedbackUnavailable.style.display = 'none';
+        });
+
+        // Check Subdomain Availability Simulation
+        btnCheck.addEventListener('click', () => {
+            const query = subdomainSearch.value.trim().toLowerCase();
+            
+            if (query.length < 3) {
+                alert("Iltimos, kamida 3 ta belgi kiriting.");
+                return;
+            }
+
+            // Reset feedbacks
+            feedbackChecking.style.display = 'flex';
+            feedbackAvailable.style.display = 'none';
+            feedbackUnavailable.style.display = 'none';
+
+            // Simulate high-fidelity network delay
+            setTimeout(() => {
+                feedbackChecking.style.display = 'none';
+                
+                const isReserved = reservedNames.includes(query);
+                // Also 30% chance mock random reserved
+                const isRandomTaken = Math.random() < 0.25;
+
+                if (isReserved || isRandomTaken) {
+                    feedbackUnavailable.style.display = 'block';
+                } else {
+                    availableDomainName.textContent = `${query}.wwwz.uz`;
+                    targetDomainSpan.textContent = `${query}.wwwz.uz`;
+                    finalDomainSpan.textContent = `${query}.wwwz.uz`;
+                    feedbackAvailable.style.display = 'block';
+                }
+            }, 1200);
+        });
+
+        // Toggle form target label & placeholder based on Record Type select
+        formRecordType.addEventListener('change', (e) => {
+            if (e.target.value === 'A') {
+                labelTarget.textContent = 'Server IP manzili (A Record)';
+                formTarget.placeholder = 'masalan: 185.196.212.52';
+            } else {
+                labelTarget.textContent = 'Yo'naltiriladigan Domen (CNAME)';
+                formTarget.placeholder = 'masalan: cname.vercel-dns.com';
+            }
+        });
+
+        // Modal opening/closing functions
+        function openModal() {
+            modalStepForm.style.display = 'block';
+            modalStepSuccess.style.display = 'none';
+            claimModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            claimModal.classList.remove('open');
+            document.body.style.overflow = '';
+            claimForm.reset();
+        }
+
+        btnClaim.addEventListener('click', openModal);
+        btnCloseModal.addEventListener('click', closeModal);
+        btnCancelClaim.addEventListener('click', closeModal);
+        btnSuccessDone.addEventListener('click', closeModal);
+
+        // Form submission simulation
+        claimForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show loading inside button
+            const submitBtn = claimForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'O\'rnatilmoqda...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Add registered domain to our ticker feed
+                const newDomain = subdomainSearch.value.trim().toLowerCase();
+                addTickerItem(newDomain);
+                
+                // Switch steps
+                modalStepForm.style.display = 'none';
+                modalStepSuccess.style.display = 'flex';
+            }, 2000);
+        });
+
+        // Live Feed Mock Data Generator
+        const mockDomains = [
+            { domain: 'muhammad.wwwz.uz', time: '1 daqiqa avval' },
+            { domain: 'react-dev.wwwz.uz', time: '5 daqiqa avval' },
+            { domain: 'it-school.wwwz.uz', time: '12 daqiqa avval' },
+            { domain: 'designer-portfolio.wwwz.uz', time: '25 daqiqa avval' },
+            { domain: 'shaxsiyblog.wwwz.uz', time: '40 daqiqa avval' },
+            { domain: 'online-magazin.wwwz.uz', time: '1 soat avval' },
+            { domain: 'api-service.wwwz.uz', time: '3 soat avval' },
+            { domain: 'nodirbek.wwwz.uz', time: '4 soat avval' }
+        ];
+
+        const tickerRoot = document.getElementById('ticker-root');
+
+        function renderTicker() {
+            // Render original list + duplicated list for seamless looping
+            let tickerHtml = '';
+            const allItems = [...mockDomains, ...mockDomains]; // Duplicate for endless effect
+            
+            allItems.forEach(item => {
+                tickerHtml += `
+                    <div class="ticker-card">
+                        <span class="ticker-dot"></span>
+                        <span class="ticker-domain">${item.domain}</span>
+                        <span class="ticker-time">${item.time}</span>
+                    </div>
+                `;
+            });
+            tickerRoot.innerHTML = tickerHtml;
+        }
+
+        function addTickerItem(name) {
+            const domainName = `${name}.wwwz.uz`;
+            mockDomains.unshift({ domain: domainName, time: 'Yaqinda ro\'yxatdan o\'tdi' });
+            if (mockDomains.length > 12) {
+                mockDomains.pop();
+            }
+            renderTicker();
+        }
+
+        // Initialize Ticker
+        renderTicker();
+    </script>
+</body>
+</html>
