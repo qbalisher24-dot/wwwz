@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WWWZ.UZ — Erkin va Bepul Subdomenlar Platformasi</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variable Definitions */
+        :root {
+            /* Smooth transitions for theme toggles */
+            --transition-theme: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                                color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --bg-base: #0a0a0a;
+            --bg-surface: #121212;
+            --bg-surface-hover: #1c1c1c;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.16);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #52525b;
+            --accent: #ffffff;
+            --accent-contrast: #000000;
+            --accent-error: #ef4444;
+            --accent-success: #22c55e;
+            --shadow-elevation: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(10, 10, 10, 0.75);
+        }
+
+        /* Light Theme Variables */
+        [data-theme="light"] {
+            --bg-base: #f9fafb;
+            --bg-surface: #ffffff;
+            --bg-surface-hover: #f3f4f6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --border-hover: rgba(0, 0, 0, 0.16);
+            --text-primary: #000000;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --accent: #000000;
+            --accent-contrast: #ffffff;
+            --accent-error: #dc2626;
+            --accent-success: #16a34a;
+            --shadow-elevation: 0 20px 40px -10px rgba(0, 0, 0, 0.06);
+            --glass-bg: rgba(249, 250, 251, 0.75);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            transition: var(--transition-theme);
+        }
+
+        body {
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background-color: var(--text-primary);
+            color: var(--bg-base);
+        }
+
+        /* Layout Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-theme);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4.5rem;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.05em;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-theme);
+        }
+
+        .logo span {
+            background: var(--text-primary);
+            color: var(--bg-base);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: var(--transition-theme);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Header Controls (Theme and CTA) */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Button Primitives */
+        .btn {
+            background-color: var(--text-primary);
+            color: var(--bg-base);
+            border: 1px solid var(--text-primary);
+            padding: 0.65rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-theme), transform 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            height: 2.6rem;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="light"] .btn:hover {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+            box-shadow: none;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            width: 2.6rem;
+            height: 2.6rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--text-primary);
+            background-color: var(--bg-surface-hover);
+        }
+
+        .theme-toggle svg {
+            width: 1.15rem;
+            height: 1.15rem;
+        }
+
+        .theme-toggle .sun-icon { display: none; }
+        .theme-toggle .moon-icon { display: block; }
+
+        [data-theme="light"] .theme-toggle .sun-icon { display: block; }
+        [data-theme="light"] .theme-toggle .moon-icon { display: none; }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: calc(100dvh - 4.5rem);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-badge {
+            align-self: flex-start;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 0.45rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-theme);
+        }
+
+        .hero-badge .live-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-success);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .hero-title span {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 52ch;
+            line-height: 1.5;
+            transition: var(--transition-theme);
+        }
+
+        /* Interactive Domain Claim Bento Box */
+        .hero-interactive {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-elevation);
+            transition: var(--transition-theme);
+        }
+
+        /* Noise texture for depth */
+        .hero-interactive::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .search-container {
+            z-index: 2;
+        }
+
+        .search-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .search-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .domain-input-group {
+            display: flex;
+            align-items: stretch;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 0.3rem;
+            transition: var(--transition-theme);
+        }
+
+        .domain-input-group:focus-within {
+            border-color: var(--text-primary);
+        }
+
+        .subdomain-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            padding: 0.85rem 1rem;
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .subdomain-input::placeholder {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .domain-suffix {
+            display: flex;
+            align-items: center;
+            padding-right: 1.25rem;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        /* Feedback States */
+        .feedback-box {
+            display: none;
+            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            font-size: 0.85rem;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border: 1px solid transparent;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-checking {
+            background-color: var(--bg-base);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--text-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .feedback-available {
+            background-color: rgba(34, 197, 94, 0.05);
+            border-color: rgba(34, 197, 94, 0.2);
+            color: var(--accent-success);
+        }
+
+        .feedback-available .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(34, 197, 94, 0.1);
+            gap: 1rem;
+        }
+
+        .feedback-unavailable {
+            background-color: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: var(--accent-error);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 8rem 0;
+            border-top: 1px solid var(--border-color);
+            transition: var(--transition-theme);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 0.82fr 1.18fr;
+            gap: 6rem;
+        }
+
+        .features-left {
+            position: sticky;
+            top: 7.5rem;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .features-left h2 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .features-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 35ch;
+            transition: var(--transition-theme);
+        }
+
+        .features-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-row {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 0.4fr 1.6fr;
+            gap: 2rem;
+            transition: var(--transition-theme);
+        }
+
+        .feature-row:first-child {
+            padding-top: 0;
+        }
+
+        .feature-row:hover {
+            border-bottom-color: var(--text-primary);
+        }
+
+        .feature-num {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition-theme);
+        }
+
+        .feature-row:hover .feature-num {
+            color: var(--text-primary);
+        }
+
+        .feature-details h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .feature-details p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: var(--transition-theme);
+        }
+
+        /* Infinite Ticker (Live Registration Feed) */
+        .ticker-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition-theme);
+        }
+
+        .ticker-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: var(--transition-theme);
+        }
+
+        .ticker-container {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            animation: scroll-ticker 32s linear infinite;
+        }
+
+        .ticker-container:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 1rem)); }
+        }
+
+        .ticker-card {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            user-select: none;
+            transition: var(--transition-theme);
+        }
+
+        .ticker-card:hover {
+            border-color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .ticker-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-success);
+            border-radius: 50%;
+        }
+
+        .ticker-domain {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .ticker-time {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            transition: var(--transition-theme);
+        }
+
+        /* FAQ Accordion Section */
+        .faq-section {
+            padding: 8rem 0;
+        }
+
+        .faq-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            background-color: var(--bg-surface);
+            transition: var(--transition-theme);
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-hover);
+        }
+
+        .faq-trigger {
+            width: 100%;
+            padding: 1.6rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition-theme);
+        }
+
+        .faq-trigger svg {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
+            stroke: var(--text-secondary);
+        }
+
+        .faq-item.active {
+            border-color: var(--text-primary);
+        }
+
+        .faq-item.active .faq-trigger svg {
+            transform: rotate(45deg);
+            stroke: var(--text-primary);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .faq-content-inner {
+            padding: 0 2rem 1.6rem 2rem;
+            border-top: 1px solid var(--border-color);
+            line-height: 1.6;
+            transition: var(--transition-theme);
+        }
+
+        /* Modal Overlay & Dialog */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="light"] .modal-overlay {
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 28px;
+            padding: 2.5rem;
+            transform: scale(0.94);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), var(--transition-theme);
+            position: relative;
+            box-shadow: var(--shadow-elevation);
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-surface-hover);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .modal-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            transition: var(--transition-theme);
+        }
+
+        .modal-subtitle span {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: var(--transition-theme);
+        }
+
+        .form-input {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-theme);
+            width: 100%;
+        }
+
+        .form-input:focus {
+            border-color: var(--text-primary);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .modal-btn-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn-row .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Success Step Complete */
+        .success-step {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-success);
+        }
+
+        .success-step h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            transition: var(--transition-theme);
+        }
+
+        .success-step p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 35ch;
+            transition: var(--transition-theme);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0;
+            background-color: var(--bg-base);
+            transition: var(--transition-theme);
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: var(--transition-theme);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Mobile Bottom Tab Bar (App Shell Feel) */
+        .mobile-tab-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
+            padding: 0.6rem 0.5rem calc(0.6rem + env(safe-area-inset-bottom, 0px)) 0.5rem;
+            transition: var(--transition-theme);
+        }
+
+        .mobile-tabs {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            gap: 0.25rem;
+            transition: var(--transition-smooth);
+            width: 22%;
+            padding: 0.25rem 0;
+        }
+
+        .tab-item svg {
+            width: 1.4rem;
+            height: 1.4rem;
+            stroke: var(--text-secondary);
+            transition: var(--transition-smooth);
+        }
+
+        .tab-item.active {
+            color: var(--text-primary);
+        }
+
+        .tab-item.active svg {
+            stroke: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Desktop responsiveness rules */
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                padding: 4rem 0 6rem 0;
+                text-align: left;
+            }
+
+            .hero-badge {
+                align-self: flex-start;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .features-left {
+                position: relative;
+                top: 0;
+            }
+
+            .feature-row {
+                grid-template-columns: auto 1fr;
+                gap: 1.5rem;
+                padding: 2rem 0;
+            }
+        }
+
+        /* Mobile specific interface styles (App Feel) */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            /* Hide top nav items to emulate a clean app header on mobile */
+            header nav, header .header-controls {
+                display: none;
+            }
+
+            .nav-wrapper {
+                height: 3.5rem;
+                justify-content: center; /* Center the logo like a mobile app */
+            }
+
+            /* Activate the bottom tab bar */
+            .mobile-tab-bar {
+                display: block;
+            }
+
+            /* Push body up from bottom safe zone for tab bar comfort */
+            body {
+                padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+            }
+
+            .hero {
+                padding: 2rem 0 3rem 0;
+                min-height: auto;
+                gap: 2.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.35rem;
+                line-height: 1.1;
+            }
+
+            .hero-desc {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            .hero-interactive {
+                padding: 1.75rem;
+                border-radius: 22px;
+            }
+
+            .search-title {
+                font-size: 1.15rem;
+            }
+
+            /* Stack domain inputs gracefully for touch sizing */
+            .domain-input-group {
+                flex-direction: column;
+                background-color: transparent;
+                border: none;
+                gap: 0.6rem;
+                padding: 0;
+            }
+
+            .subdomain-input, .domain-suffix {
+                background-color: var(--bg-surface-hover);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 0.9rem 1.1rem;
+                font-size: 1rem;
+                height: 3.2rem;
+            }
+
+            .subdomain-input:focus {
+                border-color: var(--text-primary);
+            }
+
+            .domain-suffix {
+                justify-content: flex-end;
+                padding-right: 1.1rem;
+            }
+
+            .hero-interactive .btn {
+                width: 100%;
+                justify-content: center;
+                height: 3.2rem;
+                font-size: 0.95rem;
+                margin-top: 0.5rem;
+            }
+
+            .feedback-box {
+                padding: 1.1rem;
+            }
+
+            .feedback-available .action-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.85rem;
+            }
+
+            .feedback-available .action-row .btn {
+                width: 100%;
+                height: 2.8rem;
+            }
+
+            /* Feature sections mobile cleanup */
+            .features-section {
+                padding: 5rem 0;
+            }
+
+            .features-left h2 {
+                font-size: 2.15rem;
+            }
+
+            .feature-row {
+                padding: 1.75rem 0;
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .feature-num {
+                font-size: 0.85rem;
+            }
+
+            .faq-section {
+                padding: 5rem 0;
+            }
+
+            .faq-title {
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .faq-trigger {
+                padding: 1.25rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .faq-content-inner {
+                padding: 0 1.5rem 1.25rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            /* Dialog Box */
+            .modal {
+                padding: 1.75rem;
+                border-radius: 24px;
+            }
+
+            .modal-title {
+                font-size: 1.35rem;
+            }
+
+            .form-input {
+                padding: 0.9rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .modal-btn-row {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .modal-btn-row .btn {
+                width: 100%;
+                height: 3rem;
+            }
+
+            /* Footer mobile layout */
+            footer {
+                padding: 3rem 0;
+            }
+
+            .footer-wrapper {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <span>W</span> wwwz.uz
+            </a>
+            <nav>
+                <a href="#features">Imkoniyatlar</a>
+                <a href="#faq">Ko'p so'raladigan savollar</a>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="btn-theme-toggle-desktop" title="Mavzuni o'zgartirish">
+                    <!-- Sun icon -->
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <!-- Moon icon -->
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <a href="#search-zone" class="btn">Subdomen claim qilish</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="container hero" id="search-zone">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="live-dot"></span> 24/7 Avtomatlashtirilgan Platforma
+                </div>
+                <h1 class="hero-title">
+                    O'z g'oyangizni<br>
+                    <span>dunyoga taqdim eting</span>
+                </h1>
+                <p class="hero-desc">
+                    wwwz.uz platformasi orqali mutlaqo bepul, xavfsiz va tezkor subdomenga ega bo'ling. Hech qanday murakkabliklarsiz, bir necha soniyada o'z loyihangizni internetga ulang.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
+                    <a href="#features" class="btn btn-secondary">Batafsil ma'lumot</a>
+                </div>
+            </div>
+
+            <!-- Interactive Domain Checker Card -->
+            <div class="hero-interactive">
+                <div class="search-container">
+                    <h3 class="search-title">Subdomenni band qilish</h3>
+                    <p class="search-desc">O'zingiz xohlagan nomni yozing va uning bo'sh yoki bandligini tekshiring.</p>
+                    
+                    <div class="domain-input-group">
+                        <input type="text" id="subdomain-search" class="subdomain-input" placeholder="masalan: portfoliom" autocomplete="off" spellcheck="false">
+                        <div class="domain-suffix">.wwwz.uz</div>
+                    </div>
+                    
+                    <button id="btn-check" class="btn" style="width: 100%; justify-content: center; margin-top: 1.25rem;">
+                        Tekshirish
+                    </button>
+                </div>
+
+                <!-- Feedback States -->
+                <div id="feedback-checking" class="feedback-box feedback-checking">
+                    <div class="spinner"></div>
+                    <span>Domen tekshirilmoqda, iltimos kuting...</span>
+                </div>
+
+                <div id="feedback-available" class="feedback-box feedback-available">
+                    <div style="font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                        Tabriklaymiz! Ushbu domen bo'sh.
+                    </div>
+                    <div style="margin-top: 0.25rem; font-size: 0.8rem; opacity: 0.85;">
+                        Siz ushbu domenni mutlaqo bepul o'zingizniki qilishingiz mumkin.
+                    </div>
+                    <div class="action-row">
+                        <span style="font-family: var(--font-mono); font-weight: 700; font-size: 1rem; color: var(--text-primary);" id="available-domain-name">portfolio.wwwz.uz</span>
+                        <button class="btn btn-secondary" id="btn-claim" style="padding: 0.5rem 1rem; font-size: 0.85rem;">O'rnatish</button>
+                    </div>
+                </div>
+
+                <div id="feedback-unavailable" class="feedback-box feedback-unavailable">
+                    <div style="font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        Afsuski, bu domen band!
+                    </div>
+                    <div style="margin-top: 0.25rem; font-size: 0.8rem; opacity: 0.85;">
+                        Iltimos, boshqa nom kiriting yoki boshqa nomlarni tekshirib ko'ring.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Showcase Ticker -->
+        <section class="ticker-section">
+            <h4 class="ticker-title">Yaqinda faollashtirilgan subdomenlar</h4>
+            <div style="display: flex; overflow: hidden; width: 100%;">
+                <div class="ticker-container" id="ticker-root">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="container features-section" id="features">
+            <div class="features-grid">
+                <div class="features-left">
+                    <h2>Nega aynan wwwz.uz?</h2>
+                    <p>Biz dasturchilar va startapchilar uchun eng qulay va minimalistik infratuzilmani taklif etamiz.</p>
+                </div>
+                <div class="features-right">
+                    
+                    <div class="feature-row">
+                        <div class="feature-num">01</div>
+                        <div class="feature-details">
+                            <h3>Tezkor DNS yo'naltirish</h3>
+                            <p>Bizning ultra-zamonaviy DNS boshqaruv tizimimiz orqali subdomeningiz har qanday xalqaro platformalarga (Vercel, Cloudflare, Netlify, Github Pages yoki shaxsiy VPS) bir necha soniyada bog'lanadi.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-num">02</div>
+                        <div class="feature-details">
+                            <h3>Bepul va Umrbod</h3>
+                            <p>Hech qanday yashirin to'lovlar, kredit kartalar yoki kutilmagan reklamalar yo'q. Loyihangiz wwwz.uz bilan birga mutlaqo tekinga va doimiy ravishda ishlaydi.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-num">03</div>
+                        <div class="feature-details">
+                            <h3>Avtomatik SSL xavfsizligi</h3>
+                            <p>Siz yo'naltirgan har bir subdomen uchun avtomatik ravishda bepul HTTPS (SSL) sertifikati taqdim etiladi. Saytingiz doimo xavfsiz va Google talablariga mos bo'ladi.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-row">
+                        <div class="feature-num">04</div>
+                        <div class="feature-details">
+                            <h3>Oddiy va Qulay API</h3>
+                            <p>Avtomatlashtirishni yoqtirasizmi? Kelajakda ishlab chiqiladigan sodda API orqali dasturiy ravishda subdomenlarni ro'yxatdan o'tkazish va boshqarish imkoniyatiga ega bo'lasiz.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container faq-section" id="faq">
+            <h2 class="faq-title">Tez-tez beriladigan savollar</h2>
+            
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Xizmat haqiqatdan ham bepulmi?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Ha, mutlaqo bepul. wwwz.uz O'zbekistondagi yosh dasturchilar va ijodkorlar o'z loyihalarini osonroq sinab ko'rishlari hamda internetga joylashtirishlari uchun yaratilgan mustaqil notijorat loyihadir.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Subdomenni qanday qilib o'zimning hosting/serverimga ulayman?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Ro'yxatdan o'tish paytida siz o'z hostingingiz IP-manzilini (A yozuvi uchun) yoki yo'naltiriladigan asosiy domenni (CNAME yozuvi uchun) ko'rsatasiz. Tizimimiz buni avtomatik ravishda global DNS serverlarimizga joylaydi.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Bitta odam nechta subdomen ro'yxatdan o'tkazishi mumkin?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Suiiste'mol qilishlarning oldini olish maqsadida bitta foydalanuvchi/email hisobiga dastlab maksimal 3 tagacha bepul subdomen beriladi. Agar loyihalaringiz soni va ko'lami ortsa, qo'shimcha so'rov yuborishingiz mumkin.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span>Taqiqlangan yoki noqonuniy loyihalarga ruxsat beriladimi?</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            Yo'q. Fishing, firibgarlik, spam, kattalar uchun mo'ljallangan kontentlar yoki har qanday noqonuniy loyihalar uchun ochilgan subdomenlar ogohlantirishsiz darhol bloklanadi va o'chiriladi.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-wrapper">
+            <div class="footer-left">
+                <a href="#" class="logo" style="margin-bottom: 0.5rem;">
+                    <span>W</span> wwwz.uz
+                </a>
+                <p class="footer-copy">© 2026 wwwz.uz. Barcha huquqlar himoyalangan.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#features">Imkoniyatlar</a>
+                <a href="#faq">FAQ</a>
+                <a href="mailto:info@wwwz.uz">Aloqa</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Tab Bar -->
+    <div class="mobile-tab-bar">
+        <div class="mobile-tabs">
+            <button class="tab-item active" onclick="scrollToSection('search-zone', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Qidiruv</span>
+            </button>
+            <button class="tab-item" onclick="scrollToSection('features', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="9"></rect>
+                    <rect x="14" y="3" width="7" height="5"></rect>
+                    <rect x="14" y="12" width="7" height="9"></rect>
+                    <rect x="3" y="16" width="7" height="5"></rect>
+                </svg>
+                <span>Imkoniyat</span>
+            </button>
+            <button class="tab-item" onclick="scrollToSection('faq', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>FAQ</span>
+            </button>
+            <button class="tab-item" id="btn-theme-toggle-mobile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon" style="display: none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <span>Mavzu</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Claim Modal Window -->
+    <div class="modal-overlay" id="claim-modal">
+        <div class="modal">
+            <button class="close-modal" id="btn-close-modal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            
+            <!-- Form Step -->
+            <div id="modal-step-form">
+                <h3 class="modal-title">Subdomenni sozlash</h3>
+                <p class="modal-subtitle">Siz tanlagan domen: <span id="target-domain-span">portfolio.wwwz.uz</span></p>
+                
+                <form id="claim-form">
+                    <div class="form-group">
+                        <label for="form-email">Email manzilingiz</label>
+                        <input type="email" id="form-email" class="form-input" placeholder="ism@gmail.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="form-record-type">Yozuv turi (DNS Record Type)</label>
+                        <select id="form-record-type" class="form-input" style="background-color: var(--bg-base); cursor: pointer; color: var(--text-primary);">
+                            <option value="A">A Record (IPv4 server manzili uchun)</option>
+                            <option value="CNAME">CNAME (Vercel, GitHub Pages yoki Netlify uchun)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="form-target" id="label-target">Server IP manzili (A Record)</label>
+                        <input type="text" id="form-target" class="form-input" placeholder="masalan: 185.196.212.52" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; text-transform: none; font-size: 0.85rem; cursor: pointer; color: var(--text-secondary);">
+                            <input type="checkbox" required style="accent-color: var(--text-primary); width: 16px; height: 16px;">
+                            <span>Foydalanish shartlariga roziman</span>
+                        </label>
+                    </div>
+
+                    <div class="modal-btn-row">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-claim">Bekor qilish</button>
+                        <button type="submit" class="btn">Domen yaratish</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Step -->
+            <div id="modal-step-success" class="success-step">
+                <div class="success-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h3>Muvaffaqiyatli sozlindi!</h3>
+                <p>Sizning <span id="final-domain-span" style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary);">portfolio.wwwz.uz</span> subdomeningiz ro'yxatdan o'tkazildi va ulanmoqda.</p>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: -0.5rem;">DNS sozlamalari yangilanishi uchun taxminan 5-15 daqiqa vaqt ketishi mumkin.</p>
+                <button class="btn" id="btn-success-done" style="width: 100%; justify-content: center; margin-top: 1rem;">Tushunarli</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripting (Interactive Logic) -->
+    <script>
+        // DOM Elements
+        const subdomainSearch = document.getElementById('subdomain-search');
+        const btnCheck = document.getElementById('btn-check');
+        const feedbackChecking = document.getElementById('feedback-checking');
+        const feedbackAvailable = document.getElementById('feedback-available');
+        const feedbackUnavailable = document.getElementById('feedback-unavailable');
+        const availableDomainName = document.getElementById('available-domain-name');
+        
+        const btnClaim = document.getElementById('btn-claim');
+        const claimModal = document.getElementById('claim-modal');
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        const btnCancelClaim = document.getElementById('btn-cancel-claim');
+        const targetDomainSpan = document.getElementById('target-domain-span');
+        const finalDomainSpan = document.getElementById('final-domain-span');
+        const claimForm = document.getElementById('claim-form');
+        const formRecordType = document.getElementById('form-record-type');
+        const labelTarget = document.getElementById('label-target');
+        const formTarget = document.getElementById('form-target');
+        const modalStepForm = document.getElementById('modal-step-form');
+        const modalStepSuccess = document.getElementById('modal-step-success');
+        const btnSuccessDone = document.getElementById('btn-success-done');
+
+        // Theme Toggle Buttons (Desktop & Mobile)
+        const btnThemeToggleDesktop = document.getElementById('btn-theme-toggle-desktop');
+        const btnThemeToggleMobile = document.getElementById('btn-theme-toggle-mobile');
+
+        // Reserved subdomains to mock unavailable names
+        const reservedNames = ['admin', 'www', 'api', 'blog', 'test', 'dev', 'mail', 'dns', 'suvan', 'ahost', 'root', 'main', 'index', 'secure', 'portal', 'cloud', 'app'];
+
+        /* ----------------------------------
+           Theme Switching & Local Storage
+           ---------------------------------- */
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            // Sync mobile tab button icon representation
+            const sunIconsMobile = btnThemeToggleMobile.querySelectorAll('.sun-icon');
+            const moonIconsMobile = btnThemeToggleMobile.querySelectorAll('.moon-icon');
+
+            if (theme === 'light') {
+                sunIconsMobile.forEach(icon => icon.style.display = 'block');
+                moonIconsMobile.forEach(icon => icon.style.display = 'none');
+            } else {
+                sunIconsMobile.forEach(icon => icon.style.display = 'none');
+                moonIconsMobile.forEach(icon => icon.style.display = 'block');
+            }
+        }
+
+        // Detect default system preferences or saved preferences
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        btnThemeToggleDesktop.addEventListener('click', toggleTheme);
+        btnThemeToggleMobile.addEventListener('click', toggleTheme);
+
+
+        /* ----------------------------------
+           FAQ Accordion Interaction
+           ---------------------------------- */
+        document.querySelectorAll('.faq-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const item = trigger.parentElement;
+                const content = item.querySelector('.faq-content');
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+
+
+        /* ----------------------------------
+           Search Input Sanitizer
+           ---------------------------------- */
+        subdomainSearch.addEventListener('input', (e) => {
+            let value = e.target.value.toLowerCase();
+            value = value.replace(/[^a-z0-9-]/g, '');
+            e.target.value = value;
+            
+            // Hide outputs immediately when user changes query
+            feedbackChecking.style.display = 'none';
+            feedbackAvailable.style.display = 'none';
+            feedbackUnavailable.style.display = 'none';
+        });
+
+
+        /* ----------------------------------
+           Domain Check Simulation
+           ---------------------------------- */
+        btnCheck.addEventListener('click', () => {
+            const query = subdomainSearch.value.trim().toLowerCase();
+            
+            if (query.length < 3) {
+                alert("Iltimos, kamida 3 ta belgi kiriting.");
+                return;
+            }
+
+            feedbackChecking.style.display = 'flex';
+            feedbackAvailable.style.display = 'none';
+            feedbackUnavailable.style.display = 'none';
+
+            // Modern premium springy delay simulation
+            setTimeout(() => {
+                feedbackChecking.style.display = 'none';
+                
+                const isReserved = reservedNames.includes(query);
+                const isRandomTaken = Math.random() < 0.25;
+
+                if (isReserved || isRandomTaken) {
+                    feedbackUnavailable.style.display = 'block';
+                } else {
+                    availableDomainName.textContent = `${query}.wwwz.uz`;
+                    targetDomainSpan.textContent = `${query}.wwwz.uz`;
+                    finalDomainSpan.textContent = `${query}.wwwz.uz`;
+                    feedbackAvailable.style.display = 'block';
+                }
+            }, 1000);
+        });
+
+
+        /* ----------------------------------
+           Form Dynamic DNS Selector Labels
+           ---------------------------------- */
+        formRecordType.addEventListener('change', (e) => {
+            if (e.target.value === 'A') {
+                labelTarget.textContent = 'Server IP manzili (A Record)';
+                formTarget.placeholder = 'masalan: 185.196.212.52';
+            } else {
+                labelTarget.textContent = 'Yo\'naltiriladigan Domen (CNAME)';
+                formTarget.placeholder = 'masalan: cname.vercel-dns.com';
+            }
+        });
+
+
+        /* ----------------------------------
+           Modal Form Management
+           ---------------------------------- */
+        function openModal() {
+            modalStepForm.style.display = 'block';
+            modalStepSuccess.style.display = 'none';
+            claimModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            claimModal.classList.remove('open');
+            document.body.style.overflow = '';
+            claimForm.reset();
+        }
+
+        btnClaim.addEventListener('click', openModal);
+        btnCloseModal.addEventListener('click', closeModal);
+        btnCancelClaim.addEventListener('click', closeModal);
+        btnSuccessDone.addEventListener('click', closeModal);
+
+        // Form Submission Simulation
+        claimForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const submitBtn = claimForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sozlanmoqda...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Add registered domain to infinite marquee dynamically
+                const newDomain = subdomainSearch.value.trim().toLowerCase();
+                addTickerItem(newDomain);
+                
+                // Switch modal step
+                modalStepForm.style.display = 'none';
+                modalStepSuccess.style.display = 'flex';
+            }, 1800);
+        });
+
+
+        /* ----------------------------------
+           Mobile Tab Scrolling and Active State
+           ---------------------------------- */
+        function scrollToSection(sectionId, element) {
+            // Remove active classes on mobile tabs
+            document.querySelectorAll('.tab-item').forEach(tab => tab.classList.remove('active'));
+            
+            if (element) {
+                element.classList.add('active');
+            }
+
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Smooth offset scrolling to compensate header height
+                const yOffset = -56; 
+                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+        }
+
+        // Auto-update bottom active tab states during user scrolling
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth > 640) return; // Only trigger for mobile app views
+
+            const scrollPos = window.scrollY + 100;
+            const searchSection = document.getElementById('search-zone');
+            const featuresSection = document.getElementById('features');
+            const faqSection = document.getElementById('faq');
+
+            const tabItems = document.querySelectorAll('.mobile-tabs .tab-item');
+
+            if (scrollPos >= faqSection.offsetTop) {
+                tabItems[0].classList.remove('active');
+                tabItems[1].classList.remove('active');
+                tabItems[2].classList.add('active');
+            } else if (scrollPos >= featuresSection.offsetTop) {
+                tabItems[0].classList.remove('active');
+                tabItems[1].classList.add('active');
+                tabItems[2].classList.remove('active');
+            } else {
+                tabItems[0].classList.add('active');
+                tabItems[1].classList.remove('active');
+                tabItems[2].classList.remove('active');
+            }
+        });
+
+
+        /* ----------------------------------
+           Dynamic Live Registration Mock Data
+           ---------------------------------- */
+        const mockDomains = [
+            { domain: 'muhammad.wwwz.uz', time: '1 daqiqa avval' },
+            { domain: 'react-dev.wwwz.uz', time: '5 daqiqa avval' },
+            { domain: 'it-school.wwwz.uz', time: '12 daqiqa avval' },
+            { domain: 'designer-portfolio.wwwz.uz', time: '25 daqiqa avval' },
+            { domain: 'shaxsiyblog.wwwz.uz', time: '40 daqiqa avval' },
+            { domain: 'online-magazin.wwwz.uz', time: '1 soat avval' },
+            { domain: 'api-service.wwwz.uz', time: '3 soat avval' },
+            { domain: 'nodirbek.wwwz.uz', time: '4 soat avval' }
+        ];
+
+        const tickerRoot = document.getElementById('ticker-root');
+
+        function renderTicker() {
+            let tickerHtml = '';
+            const allItems = [...mockDomains, ...mockDomains]; // Double the items for seamless layout scrolling
+            
+            allItems.forEach(item => {
+                tickerHtml += `
+                    <div class="ticker-card">
+                        <span class="ticker-dot"></span>
+                        <span class="ticker-domain">${item.domain}</span>
+                        <span class="ticker-time">${item.time}</span>
+                    </div>
+                `;
+            });
+            tickerRoot.innerHTML = tickerHtml;
+        }
+
+        function addTickerItem(name) {
+            const domainName = `${name}.wwwz.uz`;
+            mockDomains.unshift({ domain: domainName, time: 'Hozirgina faollashdi' });
+            if (mockDomains.length > 12) {
+                mockDomains.pop();
+            }
+            renderTicker();
+        }
+
+        // Initialize Live Ticker
+        renderTicker();
+    </script>
+</body>
+</html>
